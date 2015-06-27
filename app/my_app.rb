@@ -49,8 +49,8 @@ class MyApp < Thor
   def ask_title title
   	
     if title.empty?
-    	say("Title cant be empty. Please put a value!")
-    	title = ask("Title: ")
+      say("Title cant be empty. Please put a value!")
+      title = ask("Title: ")
       return title
     end
     return title
@@ -58,9 +58,9 @@ class MyApp < Thor
   def ask_address address
   	
     if address.empty?
-    	say("Address cant be empty. Please put a value!")
-    	address = ask("Address: ")
-    	return address if address
+      say("Address cant be empty. Please put a value!")
+      address = ask("Address: ")
+      return address if address
     end
     return address
   end
@@ -71,34 +71,34 @@ class MyApp < Thor
     {:limited_to => type }
   end
   def ask_nightly_rate rate
-  	until rate =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
-    	rate = ask("Nightly Rate in EUR: ") 
-    	return rate if rate =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
+    until rate =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
+      rate = ask("Nightly Rate in EUR: ") 
+      return rate if rate =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
     end
     return rate
   end
   
   def ask_guest guest
-  	until guest =~ /\A[-+]?[0-9]+\Z/
-  		say("Max Guest can not be empty and must  have to be numeric . Please put a value!")
-    	guest = ask("Max Guest in Numeric: ")
+    until guest =~ /\A[-+]?[0-9]+\Z/
+      say("Max Guest can not be empty and must  have to be numeric . Please put a value!")
+      guest = ask("Max Guest in Numeric: ")
       return guest if guest =~ /\A[-+]?[0-9]+\Z/
     end
     return guest
   end
   def ask_email email
-  	until email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  		say("Email can not be empty and must be a valid email id. Please provide your valid email id")
-    	email = ask("Email: ")
+    until email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+      say("Email can not be empty and must be a valid email id. Please provide your valid email id")
+      email = ask("Email: ")
       return email if email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     end
     return email
   end
   def ask_phone phone
-  	phone_regex = /([0-9\s\-]{7,})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/
-  	until phone =~ phone_regex
-  		say("Phone number not be empty and must be a valid number. Please provide your phone number")
-    	phone = ask("Phone Number: ")
+    phone_regex = /([0-9\s\-]{7,})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/
+    until phone =~ phone_regex
+      say("Phone number not be empty and must be a valid number. Please provide your phone number")
+      phone = ask("Phone Number: ")
       return phone if phone =~ phone_regex
     end
     return phone
