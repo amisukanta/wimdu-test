@@ -1,0 +1,90 @@
+#app/my_app.rb
+require "thor"
+ 
+class MyApp < Thor
+  desc "new PROPERTIES", "Please Enter the credentials of your new properties!"
+  
+  def new
+    output = []
+    title = ask("Title fo your property: ")
+    title_pro = ask_title title
+    output << title_pro
+    property_type = ask_property
+    output << property_type
+    address = ask("Write your address: ")
+    address_pro = ask_address address
+    output << address_pro
+    rate = ask("Nightly Rate: ")
+    nightly_rate = ask_nightly_rate rate
+    output << nightly_rate
+    guest = ask("Max guest: ")
+    max_guest = ask_guest guest
+    output << max_guest
+    email =ask("Email: ")
+    email_pro = ask_email email
+    output << email_pro
+    phone = ask("Phone Number: ")
+    output = output.join("\n")
+    File.open("out.txt", "w") do |f|     
+     f.write(output)   
+    end
+    
+
+    puts output
+    #puts "#{property_type}"
+
+
+  end
+  
+  private
+
+  def ask_title title
+  	
+    if title.empty?
+    	say("Title cant be empty. Please put a value!")
+    	title = ask("Title: ")
+      return title
+    end
+    return title
+  end
+  def ask_address address
+  	
+    if address.empty?
+    	say("Address cant be empty. Please put a value!")
+    	address = ask("Address: ")
+    	return address if address
+    end
+    return address
+  end
+  def ask_property
+    say("Now select the property type")
+    type = ['holiday home', 'apartment','private room']
+    ask 'Select by typing the first letter and use tab from keyboard, it will auto-complete the rest.. :', 
+    {:limited_to => type }
+  end
+  def ask_nightly_rate rate
+  	until rate =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
+    	rate = ask("Nightly Rate in EUR: ") 
+    	return rate if rate =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
+    end
+    return rate
+  end
+  
+  def ask_guest guest
+  	until guest =~ /\A[-+]?[0-9]+\Z/
+  		say("Max Guest can not be empty and must  have to be numeric . Please put a value!")
+    	guest = ask("Max Guest in Numeric: ")
+      return guest if until guest =~ /\A[-+]?[0-9]+\Z/
+    end
+    return guest
+  end
+  def ask_email email
+  	until email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  		say("Email can not be empty and must be a valid email id. Please provide your valid email id")
+    	email = ask("Email: ")
+      return email if email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    end
+    return email
+  end
+end
+MyApp.start(ARGV)

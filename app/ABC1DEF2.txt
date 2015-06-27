@@ -1,0 +1,7 @@
+title: Amazing property
+type: private room
+address: Hamburg
+rate: 10 EUR
+guest: 
+email: test@gmail.com
+number: +49017846735629
